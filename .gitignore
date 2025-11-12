@@ -1,0 +1,38 @@
+# Environment variables
+.env
+
+# Home Assistant
+homeassistant/config/.storage/
+homeassistant/config/*.db
+homeassistant/config/*.db-shm
+homeassistant/config/*.db-wal
+homeassistant/config/*.log
+homeassistant/config/*.log.*
+homeassistant/config/secrets.yaml
+homeassistant/config/.HA_VERSION
+homeassistant/config/.ha_run.lock
+homeassistant/config/home-assistant.log*
+homeassistant/config/OZW_Log.txt
+homeassistant/config/image/
+homeassistant/config/deps/
+homeassistant/config/tts/
+homeassistant/config/www/
+homeassistant/config/.uuid
+homeassistant/config/known_devices.yaml
+
+# MariaDB
+mariadb/data/*
+!mariadb/data/.gitkeep
+
+# Mosquitto
+mosquitto/data/*
+!mosquitto/data/.gitkeep
+mosquitto/log/*
+!mosquitto/log/.gitkeep
+
+# General
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db

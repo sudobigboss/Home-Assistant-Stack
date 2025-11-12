@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: homeassistant/home-assistant:latest
+    volumes:
+      - ./homeassistant/config:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+    environment:
+      - TZ=${TIMEZONE:-America/New_York}
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    restart: unless-stopped
+    depends_on:
+      - mariadb
+      - mosquitto
+
+  mariadb:
+    container_name: homeassistant-mariadb
+    image: mariadb:latest
+    volumes:
+      - ./mariadb/data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-homeassistant}
+      - MYSQL_USER=${MYSQL_USER:-homeassistant}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+
+  mosquitto:
+    container_name: homeassistant-mosquitto
+    image: eclipse-mosquitto:latest
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    restart: unless-stopped
