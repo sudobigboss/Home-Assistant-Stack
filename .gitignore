@@ -36,6 +36,10 @@ pihole/etc-pihole/*
 pihole/etc-dnsmasq.d/*
 !pihole/etc-dnsmasq.d/.gitkeep
 
+# Node-RED
+nodered/data/*
+!nodered/data/.gitkeep
+
 # General
 *.swp
 *.swo
