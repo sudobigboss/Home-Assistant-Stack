@@ -30,6 +30,12 @@ mosquitto/data/*
 mosquitto/log/*
 !mosquitto/log/.gitkeep
 
+# Pi-hole
+pihole/etc-pihole/*
+!pihole/etc-pihole/.gitkeep
+pihole/etc-dnsmasq.d/*
+!pihole/etc-dnsmasq.d/.gitkeep
+
 # General
 *.swp
 *.swo
