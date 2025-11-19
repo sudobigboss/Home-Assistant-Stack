@@ -1,0 +1,83 @@
+mqtt:
+  enabled: true
+  host: homeassistant-mosquitto
+  port: 1883
+  topic_prefix: frigate
+  client_id: frigate
+  # user: mqtt_user
+  # password: mqtt_password
+
+detectors:
+  cpu:
+    type: cpu
+    num_threads: 4
+
+# Database configuration
+database:
+  path: /config/frigate.db
+
+# Configure how long to keep recordings and snapshots
+record:
+  enabled: true
+  retain:
+    days: 7
+    mode: motion
+  alerts:
+    retain:
+      days: 30
+  detections:
+    retain:
+      days: 30
+snapshots:
+  enabled: true
+  retain:
+    default: 30
+
+# Birdseye view (multi-camera overview)
+birdseye:
+  enabled: true
+  mode: continuous
+
+# Camera configuration
+cameras:
+  kitchen:
+    enabled: true
+    ffmpeg:
+      inputs:
+        - path: rtsp://wyze-bridge:8554/kitchen
+          roles:
+            - detect
+            - record
+    detect:
+      enabled: true
+      width: 1280
+      height: 720
+      fps: 5
+    objects:
+      track:
+        - person
+        - dog
+        - cat
+    record:
+      enabled: true
+      retain:
+        days: 7
+        mode: motion
+      alerts:
+        retain:
+          days: 14
+      detections:
+        retain:
+          days: 14
+    snapshots:
+      enabled: true
+      timestamp: false
+      bounding_box: true
+      crop: false
+      retain:
+        default: 14
+        objects:
+          person: 30
+detect:
+  enabled: true
+version: 0.16-0

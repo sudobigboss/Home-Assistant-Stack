@@ -40,6 +40,21 @@ pihole/etc-dnsmasq.d/*
 nodered/data/*
 !nodered/data/.gitkeep
 
+# Frigate
+frigate/config/*.db
+frigate/config/*.db-shm
+frigate/config/*.db-wal
+frigate/config/.jwt_secret
+frigate/config/.timeline
+frigate/config/.vacuum
+frigate/config/.exports
+frigate/config/backup*
+frigate/storage/*
+!frigate/storage/.gitkeep
+
+# Wyze Bridge (contains credentials and tokens)
+wyze-bridge/
+
 # General
 *.swp
 *.swo
